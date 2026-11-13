@@ -813,20 +813,19 @@ body { overflow-x: hidden; }
 }
 
 
-/* Homepage cinematic video background */
+/* Hero: static cinematic image on desktop, video only on mobile. */
 .hero { background: #080909; }
-.hero__image { z-index: -3; }
+.hero__image { z-index: -2; }
 .hero__video {
   position: absolute;
   inset: 0;
-  z-index: -2;
+  z-index: -3;
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 52%;
-  transform: scale(1.025);
-  filter: saturate(.82) brightness(.82);
+  object-position: 50% 52%;
+  filter: saturate(.86) brightness(.78);
 }
 .hero__shade {
   z-index: -1;
@@ -836,7 +835,8 @@ body { overflow-x: hidden; }
     rgba(4,5,5,.14);
 }
 @media (max-width: 760px) {
-  .hero__video { object-position: 50% 52%; }
+  .hero__image { z-index: -3; }
+  .hero__video { z-index: -2; }
   .hero__shade {
     background:
       linear-gradient(90deg, rgba(5,7,7,.67), rgba(5,7,7,.40)),
