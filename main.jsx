@@ -90,20 +90,11 @@ function Header() {
 }
 
 function Hero() {
-  const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 760px)').matches);
-  useEffect(() => {
-    const media = window.matchMedia('(max-width: 760px)');
-    const update = event => setIsMobile(event.matches);
-    setIsMobile(media.matches);
-    media.addEventListener?.('change', update);
-    return () => media.removeEventListener?.('change', update);
-  }, []);
-
   return <section className="hero" id="top">
     <div className="hero__image" aria-hidden="true" />
-    {isMobile && <video className="hero__video" autoPlay muted loop playsInline preload="none" poster="/hero-fleet.webp" aria-hidden="true">
+    <video className="hero__video" autoPlay muted loop playsInline preload="auto" poster="/hero-fleet.webp" aria-hidden="true">
       <source src="/16342260_1080_1920_60fps.mp4" type="video/mp4" />
-    </video>}
+    </video>
     <div className="hero__shade" aria-hidden="true" />
     <Header />
     <div className="container hero__content">
