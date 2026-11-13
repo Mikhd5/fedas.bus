@@ -820,7 +820,7 @@ body { overflow-x: hidden; }
   position: absolute;
   inset: 0;
   z-index: -3;
-  display: block;
+  display: none;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -836,7 +836,7 @@ body { overflow-x: hidden; }
 }
 @media (max-width: 760px) {
   .hero__image { z-index: -3; }
-  .hero__video { z-index: -2; }
+  .hero__video { display: block; z-index: -2; }
   .hero__shade {
     background:
       linear-gradient(90deg, rgba(5,7,7,.67), rgba(5,7,7,.40)),
@@ -845,6 +845,5 @@ body { overflow-x: hidden; }
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero__video { display: none; }
-  .hero__image { z-index: -2; }
+  .hero__image { z-index: -3; }
 }
