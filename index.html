@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080909" />
+  <meta name="description" content="FEDAS BUS — пасажирські перевезення до країн Європи та передача посилок. Комфорт, увага до деталей і турбота в дорозі." />
+  <meta property="og:title" content="FEDAS BUS — подорожуйте з комфортом" />
+  <meta property="og:description" content="Пасажирські перевезення до країн Європи та передача посилок." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/og-cover.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <link rel="icon" type="image/svg+xml" href="/fedas-mark.svg" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"FEDAS BUS","description":"Пасажирські перевезення до країн Європи та передача посилок.","telephone":"+380688825800","sameAs":["https://instagram.com/fedas.bus","https://t.me/fedas_bus"]}</script>
+  <title>FEDAS BUS — комфортні подорожі Європою</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel" data-presets="env,react">
+
+const PHONE = '+380 68 882 58 00';
+const PHONE_TEL = '+380688825800';
+const TELEGRAM = 'https://t.me/fedas_bus';
+const INSTAGRAM = 'https://instagram.com/fedas.bus';
+
+function Icon({ name, size = 20, stroke = 1.7, className = '' }) {
+  const common = { width: size, height: size, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: stroke, strokeLinecap: 'round', strokeLinejoin: 'round', className, 'aria-hidden': true };
+  const paths = {
+    arrow: <><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></>,
+    up: <><path d="M7 17 17 7"/><path d="M8 7h9v9"/></>,
+    menu: <><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></>,
+    close: <><path d="m6 6 12 12"/><path d="M18 6 6 18"/></>,
+    phone: <path d="M21 16.4v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 1.1 3.7 2 2 0 0 1 3.1 1.5h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L7 9.3a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.9 2.2Z"/>,
+    send: <><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></>,
+    seat: <><path d="M7 12V5a2 2 0 0 1 4 0v5h6a3 3 0 0 1 3 3v1H9a2 2 0 0 1-2-2Z"/><path d="M5 14v3a3 3 0 0 0 3 3h10"/><path d="M8 20v2"/><path d="M18 20v2"/></>,
+    snow: <><path d="M12 2v20M4 7l16 10M20 7 4 17M8 3l4 3 4-3M8 21l4-3 4 3M3 10l4-1 1-4M21 10l-4-1-1-4M3 14l4 1 1 4M21 14l-4 1-1 4"/></>,
+    wifi: <><path d="M5 12.5a11 11 0 0 1 14 0"/><path d="M8.5 16a6 6 0 0 1 7 0"/><path d="M12 20h.01"/><path d="M2 9a16 16 0 0 1 20 0"/></>,
+    plug: <><path d="M8 2v6M16 2v6M7 8h10v3a5 5 0 0 1-5 5v6"/><path d="M5 8h14"/></>,
+    bag: <><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M8 12v4M16 12v4"/></>,
+    shield: <><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></>,
+    clock: <><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></>,
+    pin: <><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></>,
+    package: <><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="M3 8v9l9 5 9-5V8M12 13v9"/></>,
+    check: <path d="m5 12 4 4L19 6"/>,
+    star: <path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.8 1-6.1-4.4-4.3 6.1-.9L12 3Z"/>,
+    globe: <><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></>,
+    instagram: <><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></>,
+    info: <><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></>,
+    copy: <><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></>
+  };
+  return <svg {...common}>{paths[name] || paths.check}</svg>;
+}
+
+function Logo({ compact = false, light = false }) {
+  const gradientId = useId().replace(/:/g, '');
+  return <a className={`brand ${compact ? 'brand--compact' : ''} ${light ? 'brand--light' : ''}`} href="#top" aria-label="FEDAS BUS — на головну">
+    <svg className="brand__symbol" viewBox="0 0 68 58" role="img" aria-label="FB">
+      <defs><linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1"><stop stopColor="#f3d69b"/><stop offset=".55" stopColor="#bd8a3d"/><stop offset="1" stopColor="#f2dba8"/></linearGradient></defs>
+      <path d="M10 45V9h27c8 0 13 4 13 11 0 5-3 9-8 10 7 1 11 6 11 12 0 9-7 14-18 14H10V45h24c5 0 8-2 8-6 0-4-3-6-8-6H23v-9h12c4 0 6-2 6-5s-2-4-6-4H20v30H10Z" fill={`url(#${gradientId})`}/>
+      <path d="M10 9h10v5h-5v41H10V9Z" fill="#f1d59c" opacity=".72"/>
+    </svg>
+    <span className="brand__copy"><span className="brand__name">FEDAS BUS</span><span className="brand__tag">COMFORT <i>•</i> SAFETY</span></span>
+  </a>;
+}
+
+const countries = [
+  { flag: '🇱🇻', name: 'Латвія', code: 'Латвія', note: 'Щоденні рейси до Європи' },
+  { flag: '🇱🇹', name: 'Литва', code: 'Литва', note: 'Зручні подорожі до Литви' },
+  { flag: '🇪🇪', name: 'Естонія', code: 'Естонія', note: 'Подорожуйте з комфортом' },
+  { flag: '🇵🇱', name: 'Польща', code: 'Польща', note: 'Регулярні поїздки до Європи' },
+  { flag: '🇦🇹', name: 'Австрія', code: 'Австрія', note: 'Подорожуйте без зайвих турбот' },
+  { flag: '🇩🇪', name: 'Німеччина', code: 'Німеччина', note: 'Комфортний шлях до вашого пункту призначення' }
+];
+
+const comfort = [
+  { icon: 'seat', title: 'Зручні сидіння', text: 'М’які крісла для комфортної поїздки.' },
+  { icon: 'snow', title: 'Клімат-контроль', text: 'Приємна температура протягом дороги.' },
+  { icon: 'wifi', title: 'Wi-Fi та зарядки', text: 'Залишайтеся на зв’язку та заряджайте пристрої в дорозі.' },
+  { icon: 'bag', title: 'Багаж входить у вартість', text: 'Перевезення багажу вже враховане у вартості поїздки.' },
+  { icon: 'shield', title: 'Безпека та досвідчені водії', text: 'Досвідчені водії та увага до безпеки кожного пасажира.' },
+  { icon: 'clock', title: 'Пунктуальність і щоденні рейси', text: 'Плануйте подорож завдяки щоденним відправленням.' }
+];
+
+function Header() {
+  const [open, setOpen] = useState(false);
+  const links = [['Напрямки', '#destinations'], ['Комфорт', '#comfort'], ['Автопарк', '#fleet'], ['Посилки', '#parcels'], ['Контакти', '#contacts']];
+  useEffect(() => {
+    document.body.classList.toggle('menu-open', open);
+    return () => document.body.classList.remove('menu-open');
+  }, [open]);
+  return <header className="site-header">
+    <div className="header-inner container">
+      <Logo />
+      <nav className={`nav ${open ? 'nav--open' : ''}`} aria-label="Головна навігація">
+        {links.map(([label, href]) => <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>)}
+        <a className="nav__mobile-contact" href={`tel:${PHONE_TEL}`}><Icon name="phone" size={17}/>{PHONE}</a>
+      </nav>
+      <div className="header-actions">
+        <a className="header-phone" href={`tel:${PHONE_TEL}`}><Icon name="phone" size={16}/><span>{PHONE}</span></a>
+        <a className="button button--gold button--small header-cta" href="#booking">Забронювати <Icon name="arrow" size={16}/></a>
+      </div>
+      <button className="menu-toggle" type="button" aria-label={open ? 'Закрити меню' : 'Відкрити меню'} aria-expanded={open} onClick={() => setOpen(v => !v)}><Icon name={open ? 'close' : 'menu'} size={25}/></button>
+    </div>
+  </header>;
+}
+
+function Hero() {
+  return <section className="hero" id="top">
+    <div className="hero__image" aria-hidden="true" />
+    <div className="hero__shade" aria-hidden="true" />
+    <Header />
+    <div className="container hero__content">
+      <div className="eyebrow"><span className="eyebrow__line"/> ПАСАЖИРСЬКІ ПЕРЕВЕЗЕННЯ ДО ЄВРОПИ</div>
+      <h1>Подорожуйте<br/><em>з комфортом.</em></h1>
+      <p className="hero__lead">Ваш шлях до Європи починається з турботи про кожну деталь.</p>
+      <div className="hero__buttons">
+        <a className="button button--gold" href="#booking">Залишити заявку <Icon name="arrow"/></a>
+        <a className="button button--outline" href="#destinations">Наші напрямки <Icon name="up" size={17}/></a>
+      </div>
+      <div className="hero__bottomline">
+        <div className="hero-proof"><span className="hero-proof__icon"><Icon name="shield" size={20}/></span><span><b>Комфорт і безпека</b><small>У кожній поїздці</small></span></div>
+        <div className="hero-proof"><span className="hero-proof__icon"><Icon name="clock" size={20}/></span><span><b>Завжди на зв’язку</b><small>Щодня 24/7 за профілем</small></span></div>
+        <div className="hero__scroll">ГОРТАЙТЕ НИЖЧЕ <span/></div>
+      </div>
+    </div>
+    <div className="hero__corner">FB <span>—</span> COMFORT & SAFETY</div>
+  </section>;
+}
+
+function IntroStrip() {
+  return <section className="intro-strip"><div className="container intro-strip__inner">
+    <p><span className="gold-dot"/> FEDAS BUS <span className="intro-strip__divider">/</span> Дорога має бути комфортною</p>
+    <span className="intro-strip__right">УКРАЇНА <b>→</b> ЄВРОПА</span>
+  </div></section>;
+}
+
+function SectionHeading({ kicker, title, text, centered = false }) {
+  return <div className={`section-heading ${centered ? 'section-heading--center' : ''}`}>
+    <div className="eyebrow"><span className="eyebrow__line"/>{kicker}</div>
+    <h2>{title}</h2>
+    {text && <p>{text}</p>}
+  </div>;
+}
+
+function DestinationSection({ selectedCountry, onChoose }) {
+  const points = {
+    'Латвія': [418, 83], 'Литва': [386, 125], 'Естонія': [466, 48],
+    'Польща': [302, 169], 'Австрія': [286, 244], 'Німеччина': [238, 174]
+  };
+  const origin = [390, 254];
+  const active = countries.find(c => c.code === selectedCountry) || countries[0];
+  const [x, y] = points[active.code];
+  return <section className="section destinations" id="destinations">
+    <div className="container">
+      <div className="destinations__top">
+        <SectionHeading kicker="НАШІ НАПРЯМКИ" title={<>Європа ближче,<br/><em>ніж здається.</em></>} text="Оберіть країну на інтерактивній схемі або зі списку. Натисніть на напрямок, щоб підставити його у форму заявки." />
+        <div className="route-map">
+          <div className="route-map__topline"><span>ІНТЕРАКТИВНА СХЕМА</span><span><i/> НАПРЯМОК ОБРАНО</span></div>
+          <svg viewBox="0 0 600 340" role="img" aria-label="Схематична карта напрямків FEDAS BUS з України до шести країн Європи">
+            <defs><linearGradient id="routeGlow" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#f0d39b"/><stop offset="1" stopColor="#a87536"/></linearGradient></defs>
+            <path className="route-map__land" d="M77 92 111 53 161 59 190 34 237 48 265 30 300 55 343 43 371 68 416 57 449 81 488 78 512 110 492 137 518 164 493 193 467 209 455 242 425 251 411 286 375 302 344 284 314 303 281 280 247 294 214 270 183 281 153 252 120 251 103 216 77 191 92 160 65 131Z"/>
+            <path className="route-map__border" d="M77 92 111 53 161 59 190 34 237 48 265 30 300 55 343 43 371 68 416 57 449 81 488 78 512 110 492 137 518 164 493 193 467 209 455 242 425 251 411 286 375 302 344 284 314 303 281 280 247 294 214 270 183 281 153 252 120 251 103 216 77 191 92 160 65 131Z"/>
+            {countries.map(c => <line key={c.code} className={`route-map__route ${selectedCountry === c.code ? 'is-active' : ''}`} x1={origin[0]} y1={origin[1]} x2={points[c.code][0]} y2={points[c.code][1]} />)}
+            <circle className="route-map__origin-pulse" cx={origin[0]} cy={origin[1]} r="17"/><circle className="route-map__origin" cx={origin[0]} cy={origin[1]} r="6"/>
+            <text className="route-map__origin-label" x="405" y="278">УКРАЇНА</text>
+            {countries.map(c => { const [cx,cy] = points[c.code]; return <g key={c.code} className={`route-map__point ${selectedCountry === c.code ? 'is-active' : ''}`} role="button" tabIndex="0" aria-label={`Обрати напрямок ${c.name}`} onClick={() => onChoose(c.code)} onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && onChoose(c.code)}>
+              <circle className="route-map__hit" cx={cx} cy={cy} r="21"/><circle className="route-map__dot" cx={cx} cy={cy} r="6"/><text className="route-map__country" x={cx+12} y={cy-10}>{c.name.toUpperCase()}</text>
+            </g>; })}
+            <text className="route-map__sea" x="75" y="322">EUROPE • FEDAS BUS</text>
+          </svg>
+          <div className="route-map__selected"><span className="route-map__flag">{active.flag}</span><span><small>ОБРАНИЙ НАПРЯМОК</small><b>{active.name}</b></span><button type="button" onClick={() => onChoose(active.code)}>Залишити заявку <Icon name="arrow" size={15}/></button></div>
+        </div>
+      </div>
+      <div className="destination-grid">
+        {countries.map((c, i) => <button className={`destination-card ${selectedCountry === c.code ? 'is-selected' : ''}`} key={c.code} onClick={() => onChoose(c.code)} aria-pressed={selectedCountry === c.code}>
+          <span className="destination-card__number">0{i + 1}</span><span className="destination-card__flag">{c.flag}</span>
+          <span className="destination-card__name">{c.name}</span><span className="destination-card__arrow"><Icon name="arrow" size={18}/></span>
+        </button>)}
+      </div>
+      <div className="destinations__note"><Icon name="info" size={15}/><span>Це схема країн призначення, а не точна карта міст чи зупинок. Конкретні міста, місця посадки та графік відправлень потрібно уточнювати у перевізника.</span></div>
+    </div>
+  </section>;
+}
+
+function ComfortSection() {
+  return <section className="section comfort" id="comfort">
+    <div className="container comfort__layout">
+      <div className="comfort__visual">
+        <img src="/interior.webp" alt="Салон мікроавтобуса з комфортними пасажирськими сидіннями" loading="lazy" />
+        <div className="comfort__visual-shade"/>
+        <div className="comfort__visual-caption"><span>01 / 06</span><b>Комфорт у кожній деталі</b></div>
+        <div className="comfort__seal"><Icon name="star" size={19}/><span>COMFORT<br/>FIRST</span></div>
+      </div>
+      <div className="comfort__copy">
+        <SectionHeading kicker="КОМФОРТ У ДОРОЗІ" title={<>Приємна дорога<br/><em>починається тут.</em></>} text="Ми зібрали важливі для поїздки зручності, щоб час у дорозі проходив спокійно та комфортно." />
+        <div className="comfort-list">
+          {comfort.map((item, i) => <div className="comfort-item" key={item.title}>
+            <span className="comfort-item__icon"><Icon name={item.icon} size={21}/></span>
+            <span className="comfort-item__copy"><b>{item.title}</b><small>{item.text}</small></span>
+            <span className="comfort-item__number">0{i+1}</span>
+          </div>)}
+        </div>
+        <a className="text-link" href="#booking">Запитати про поїздку <Icon name="arrow" size={17}/></a>
+      </div>
+    </div>
+  </section>;
+}
+
+function SafetySection() {
+  const items = [
+    ['shield', 'Увага до безпеки', 'У матеріалах компанії заявлені ремені безпеки та системи ABS і ESP.'],
+    ['clock', 'Пунктуальність', 'Уточнюйте актуальний час і місце відправлення під час бронювання.'],
+    ['phone', 'Зв’язок у дорозі', 'Команда залишається доступною для комунікації з пасажирами.']
+  ];
+  return <section className="safety-band"><div className="container safety-band__inner">
+    <div className="safety-band__intro"><span className="eyebrow"><span className="eyebrow__line"/> НАШ ПРІОРИТЕТ</span><h2>Спокій у дорозі<br/><em>має значення.</em></h2></div>
+    <div className="safety-band__items">{items.map(([icon,title,text])=><div className="safety-point" key={title}><Icon name={icon} size={24}/><b>{title}</b><p>{text}</p></div>)}</div>
+  </div></section>;
+}
+
+function FleetSection() {
+  return <section className="section fleet" id="fleet">
+    <div className="container">
+      <div className="fleet__heading"><SectionHeading kicker="АВТОПАРК FEDAS BUS" title={<>Простір для<br/><em>вашої подорожі.</em></>} text="У візуальних матеріалах FEDAS BUS представлені мікроавтобуси Mercedes-Benz Sprinter та Volkswagen Crafter."/><div className="fleet__side-note">Кожна деталь важлива — від першого кроку до прибуття.</div></div>
+      <div className="fleet-cards">
+        <article className="fleet-card fleet-card--main"><img src="/hero-fleet.webp" alt="Мікроавтобуси Mercedes-Benz Sprinter у фірмовому стилі FEDAS BUS" loading="lazy"/><div className="fleet-card__overlay"/><div className="fleet-card__content"><span>01 / MERCEDES-BENZ</span><h3>Sprinter</h3><p>Комфорт у дорозі та увага до кожного пасажира.</p></div><span className="fleet-card__tag">FEDAS BUS</span></article>
+        <article className="fleet-card fleet-card--secondary"><img src="/fleet-crafter.webp" alt="Мікроавтобус на європейській дорозі" loading="lazy"/><div className="fleet-card__overlay"/><div className="fleet-card__content"><span>02 / VOLKSWAGEN</span><h3>Crafter</h3><p>Ще один автомобіль, представлений у матеріалах компанії.</p></div><span className="fleet-card__tag">COMFORT & SAFETY</span></article>
+      </div>
+      <p className="fleet-disclaimer">Фотографії та назви моделей наведені за матеріалами Instagram. Комплектацію, кількість місць і доступність конкретного автомобіля уточнюйте перед поїздкою.</p>
+    </div>
+  </section>;
+}
+
+function ParcelSection() {
+  return <section className="section parcels" id="parcels">
+    <div className="container parcels__panel">
+      <div className="parcels__photo"><img src="/parcels.webp" alt="Посилки в багажному відділенні мікроавтобуса FEDAS BUS" loading="lazy"/><span className="parcels__photo-label">DELIVERY SERVICE <b>—</b> EUROPE</span></div>
+      <div className="parcels__copy"><span className="eyebrow"><span className="eyebrow__line"/> ДОДАТКОВА ПОСЛУГА</span><h2>Передача<br/><em>посилок.</em></h2><p>Потрібно передати речі близьким або партнерам у Європі? Зверніться до FEDAS BUS, щоб уточнити напрямок, умови та можливість передачі.</p><div className="parcels__features"><span><Icon name="check" size={17}/> Швидко</span><span><Icon name="check" size={17}/> Надійно</span><span><Icon name="check" size={17}/> З турботою</span></div><a className="button button--gold" href="#booking" onClick={() => window.dispatchEvent(new CustomEvent('fedas-service', { detail: 'Передача посилки' }))}>Запитати про посилку <Icon name="arrow"/></a></div>
+    </div>
+  </section>;
+}
+
+function BookingSection({ initialCountry }) {
+  const [service, setService] = useState('Пасажирська поїздка');
+  const [country, setCountry] = useState(initialCountry || 'Німеччина');
+  const [form, setForm] = useState({ name: '', phone: '', from: '', date: '', passengers: '1', details: '' });
+  const [requestText, setRequestText] = useState('');
+  const [copied, setCopied] = useState(false);
+  useEffect(() => setCountry(initialCountry || 'Німеччина'), [initialCountry]);
+  useEffect(() => {
+    const handler = e => setService(e.detail || 'Пасажирська поїздка');
+    window.addEventListener('fedas-service', handler);
+    return () => window.removeEventListener('fedas-service', handler);
+  }, []);
+  const update = e => setForm(old => ({ ...old, [e.target.name]: e.target.value }));
+  const handleSubmit = e => {
+    e.preventDefault();
+    const lines = [
+      'Добрий день! Хочу залишити заявку FEDAS BUS.',
+      `Послуга: ${service}`,
+      `Ім’я: ${form.name}`,
+      `Телефон: ${form.phone}`,
+      `Звідки: ${form.from || 'Не вказано'}`,
+      `Напрямок: ${country}`,
+      ...(service === 'Пасажирська поїздка' ? [`Кількість пасажирів: ${form.passengers}`, `Бажана дата: ${form.date || 'Уточню окремо'}`] : []),
+      `Деталі: ${form.details || 'Немає додаткових побажань'}`
+    ];
+    setRequestText(lines.join('\n'));
+    setCopied(false);
+  };
+  const copyRequest = async () => {
+    try {
+      await navigator.clipboard.writeText(requestText);
+      setCopied(true);
+    } catch {
+      const area = document.createElement('textarea');
+      area.value = requestText; document.body.appendChild(area); area.select();
+      try { document.execCommand('copy'); setCopied(true); } catch { setCopied(false); }
+      area.remove();
+    }
+  };
+  const openTelegram = () => window.open(TELEGRAM, '_blank', 'noopener,noreferrer');
+  return <section className="section booking" id="booking">
+    <div className="container booking__layout">
+      <div className="booking__intro"><SectionHeading kicker="ПОЧНІМО ЗАЯВКУ" title={<>Ваша подорож<br/><em>починається тут.</em></>} text="Залиште контактні дані та коротко опишіть запит. Ми підготуємо повідомлення, яке можна надіслати команді FEDAS BUS у Telegram."/><div className="booking__contact"><span className="booking__contact-icon"><Icon name="phone" size={20}/></span><span><small>Зателефонувати</small><a href={`tel:${PHONE_TEL}`}>{PHONE}</a></span></div><div className="booking__contact"><span className="booking__contact-icon"><Icon name="send" size={20}/></span><span><small>Написати в Telegram</small><a href={TELEGRAM} target="_blank" rel="noreferrer">@fedas_bus</a></span></div></div>
+      <div className="booking-card">
+        {!requestText ? <form onSubmit={handleSubmit}>
+          <div className="form-top"><span>ЗАЯВКА FEDAS BUS</span><span className="form-top__line"/></div>
+          <div className="field"><span>Що вас цікавить?</span><div className="service-switch"><button type="button" className={service==='Пасажирська поїздка'?'active':''} onClick={()=>setService('Пасажирська поїздка')}>Поїздка</button><button type="button" className={service==='Передача посилки'?'active':''} onClick={()=>setService('Передача посилки')}>Посилка</button></div></div>
+          <div className="form-grid"><label className="field"><span>Ваше ім’я *</span><input name="name" value={form.name} onChange={update} placeholder="Як до вас звертатися" required autoComplete="name"/></label><label className="field"><span>Номер телефону *</span><input name="phone" type="tel" value={form.phone} onChange={update} placeholder="+380 ..." required autoComplete="tel"/></label></div>
+          <div className="form-grid"><label className="field"><span>Звідки вирушаєте / відправляєте</span><input name="from" value={form.from} onChange={update} placeholder="Місто або населений пункт"/></label><label className="field"><span>Країна призначення *</span><select value={country} onChange={e=>setCountry(e.target.value)} required>{countries.map(c=><option key={c.code} value={c.code}>{c.flag} {c.name}</option>)}</select></label></div>
+          {service === 'Пасажирська поїздка' && <div className="form-grid"><label className="field"><span>Бажана дата</span><input type="date" name="date" value={form.date} onChange={update}/></label><label className="field"><span>Кількість пасажирів</span><select name="passengers" value={form.passengers} onChange={update}>{['1','2','3','4','5','6','7','8'].map(n=><option key={n} value={n}>{n}</option>)}</select></label></div>}
+          <label className="field"><span>{service === 'Передача посилки' ? 'Що потрібно передати?' : 'Коментар або додаткові побажання'}</span><textarea name="details" value={form.details} onChange={update} rows="3" placeholder={service === 'Передача посилки' ? 'Коротко опишіть посилку та її розмір' : 'Наприклад, місто прибуття або інші деталі'}/></label>
+          <button className="button button--gold button--wide" type="submit">Підготувати заявку <Icon name="arrow"/></button>
+          <p className="form-note">Дані не зберігаються на сайті. Ви самостійно вирішуєте, чи копіювати та надсилати підготовлене повідомлення в Telegram.</p>
+        </form> : <div className="request-ready"><span className="request-ready__icon"><Icon name="check" size={24}/></span><span className="eyebrow"><span className="eyebrow__line"/> ЗАЯВКУ ПІДГОТОВЛЕНО</span><h3>Ще один крок<br/><em>до подорожі.</em></h3><p>Скопіюйте текст заявки та надішліть його команді FEDAS BUS у Telegram. Дані не надсилаються автоматично.</p><pre>{requestText}</pre><button className="button button--gold button--wide" onClick={copyRequest}><Icon name="copy" size={17}/>{copied ? 'Текст скопійовано' : 'Скопіювати заявку'}</button><button className="button button--outline-dark button--wide" onClick={openTelegram}>Відкрити Telegram <Icon name="send" size={17}/></button><button className="request-reset" onClick={()=>setRequestText('')}>Змінити дані заявки</button></div>}
+      </div>
+    </div>
+  </section>;
+}
+
+function FAQ() {
+  const questions = [
+    ['Які країни доступні для поїздок?', 'Актуальні напрямки FEDAS BUS: Латвія, Литва, Естонія, Польща, Австрія та Німеччина. Міста та деталі конкретного рейсу уточнюйте у перевізника.'],
+    ['Як дізнатися вартість квитка?', 'Залиште заявку або зв’яжіться з командою телефоном чи в Telegram. Вартість залежить від маршруту та деталей поїздки.'],
+    ['Чи входить багаж у вартість?', 'Так, згідно з актуальною інформацією FEDAS BUS, багаж входить у вартість поїздки. Допустимі розміри та кількість багажу варто уточнити під час бронювання.'
+    ],
+    ['Чи можна передати посилку?', 'Так, у профілі FEDAS BUS зазначена послуга передачі посилок. Напишіть, звідки й куди потрібно передати відправлення, щоб уточнити умови.'],
+    ['Як часто відправляються автобуси?', 'За актуальною інформацією FEDAS BUS, рейси відправляються щодня. Точний час, місце посадки та наявність місць уточнюйте перед бронюванням.']
+  ];
+  const [active, setActive] = useState(0);
+  return <section className="section faq"><div className="container faq__layout"><SectionHeading kicker="КОРОТКО ПРО ГОЛОВНЕ" title={<>Питання, які<br/><em>виникають найчастіше.</em></>} text="Не знайшли відповіді? Напишіть нам — команда допоможе уточнити деталі."/><div className="faq-list">{questions.map(([q,a],i)=><div className={`faq-item ${active===i?'faq-item--active':''}`} key={q}><button onClick={()=>setActive(active===i?-1:i)} aria-expanded={active===i}><span className="faq-item__number">0{i+1}</span><b>{q}</b><span className="faq-item__toggle">{active===i?'−':'+'}</span></button>{active===i&&<p>{a}</p>}</div>)}</div></div></section>;
+}
+
+function Footer() {
+  return <footer className="footer" id="contacts"><div className="container"><div className="footer__main"><div className="footer__brand"><Logo/><p>Подорожуйте з комфортом<br/>та безпекою.</p></div><div className="footer__column"><span className="footer__title">НАВІГАЦІЯ</span><a href="#destinations">Напрямки</a><a href="#comfort">Комфорт</a><a href="#fleet">Автопарк</a><a href="#parcels">Передача посилок</a></div><div className="footer__column"><span className="footer__title">ЗВ’ЯЗОК</span><a href={`tel:${PHONE_TEL}`}>{PHONE}</a><a href={TELEGRAM} target="_blank" rel="noreferrer">Telegram: @fedas_bus</a><a href={INSTAGRAM} target="_blank" rel="noreferrer">Instagram: @fedas.bus</a><span>Viber: {PHONE}</span></div><div className="footer__cta"><span className="eyebrow"><span className="eyebrow__line"/> FEDAS BUS</span><h3>До зустрічі<br/><em>в дорозі.</em></h3><a className="button button--gold" href="#booking">Залишити заявку <Icon name="arrow"/></a></div></div><div className="footer__bottom"><span>© {new Date().getFullYear()} FEDAS BUS. Усі права захищені.</span><span>COMFORT <i>•</i> SAFETY <i>•</i> EUROPE</span><a href="#top">НАГОРУ ↑</a></div></div></footer>;
+}
+
+function App() {
+  const [selectedCountry, setSelectedCountry] = useState('Німеччина');
+  const chooseCountry = name => {
+    setSelectedCountry(name);
+    document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' });
+  };
+  return <>
+    <Hero/>
+    <IntroStrip/>
+    <DestinationSection selectedCountry={selectedCountry} onChoose={chooseCountry}/>
+    <ComfortSection/>
+    <SafetySection/>
+    <FleetSection/>
+    <ParcelSection/>
+    <BookingSection initialCountry={selectedCountry}/>
+    <FAQ/>
+    <Footer/>
+    <a className="floating-contact" href={TELEGRAM} target="_blank" rel="noreferrer" aria-label="Написати FEDAS BUS у Telegram"><Icon name="send" size={21}/><span>Написати нам</span></a>
+    <div className="mobile-quickbar"><a href={`tel:${PHONE_TEL}`}><Icon name="phone" size={19}/> Зателефонувати</a><a href="#booking"><Icon name="arrow" size={19}/> Заявка</a></div>
+  </>;
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<React.StrictMode><App/></React.StrictMode>);
+
+  </script>
+</body>
+</html>
