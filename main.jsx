@@ -92,7 +92,7 @@ function Header() {
 function Hero() {
   return <section className="hero" id="top">
     <div className="hero__image" aria-hidden="true" />
-    <video className="hero__video" autoPlay muted loop playsInline preload="auto" poster="/hero-fleet.webp" aria-hidden="true">
+    <video className="hero__video" autoPlay muted loop playsInline preload="auto" aria-hidden="true">
       <source src="/16342260_1080_1920_60fps.mp4" type="video/mp4" />
     </video>
     <div className="hero__shade" aria-hidden="true" />
