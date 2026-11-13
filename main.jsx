@@ -4,6 +4,7 @@ import './styles.css';
 
 const PHONE = '+380 68 882 58 00';
 const PHONE_TEL = '+380688825800';
+const WHATSAPP = 'https://wa.me/380688825800';
 const TELEGRAM = 'https://t.me/fedas_bus';
 const INSTAGRAM = 'https://instagram.com/fedas.bus';
 
@@ -275,9 +276,10 @@ function BookingSection({ initialCountry }) {
     }
   };
   const openTelegram = () => window.open(TELEGRAM, '_blank', 'noopener,noreferrer');
+  const openWhatsApp = () => window.open(`${WHATSAPP}?text=${encodeURIComponent(requestText)}`, '_blank', 'noopener,noreferrer');
   return <section className="section booking" id="booking">
     <div className="container booking__layout">
-      <div className="booking__intro"><SectionHeading kicker="ПОЧНІМО ЗАЯВКУ" title={<>Ваша подорож<br/><em>починається тут.</em></>} text="Залиште контактні дані та коротко опишіть запит. Ми підготуємо повідомлення, яке можна надіслати команді FEDAS BUS у Telegram."/><div className="booking__contact"><span className="booking__contact-icon"><Icon name="phone" size={20}/></span><span><small>Зателефонувати</small><a href={`tel:${PHONE_TEL}`}>{PHONE}</a></span></div><div className="booking__contact"><span className="booking__contact-icon"><Icon name="send" size={20}/></span><span><small>Написати в Telegram</small><a href={TELEGRAM} target="_blank" rel="noreferrer">@fedas_bus</a></span></div></div>
+      <div className="booking__intro"><SectionHeading kicker="ПОЧНІМО ЗАЯВКУ" title={<>Ваша подорож<br/><em>починається тут.</em></>} text="Залиште контактні дані та коротко опишіть запит. Підготовлену заявку можна одразу надіслати у WhatsApp або Telegram."/><div className="booking__contact"><span className="booking__contact-icon"><Icon name="phone" size={20}/></span><span><small>Зателефонувати</small><a href={`tel:${PHONE_TEL}`}>{PHONE}</a></span></div><div className="booking__contact"><span className="booking__contact-icon"><Icon name="send" size={20}/></span><span><small>Написати в Telegram</small><a href={TELEGRAM} target="_blank" rel="noreferrer">@fedas_bus</a></span></div><div className="booking__contact"><span className="booking__contact-icon"><Icon name="phone" size={20}/></span><span><small>Написати у WhatsApp</small><a href={WHATSAPP} target="_blank" rel="noreferrer">WhatsApp FEDAS BUS</a></span></div></div>
       <div className="booking-card">
         {!requestText ? <form onSubmit={handleSubmit}>
           <div className="form-top"><span>ЗАЯВКА FEDAS BUS</span><span className="form-top__line"/></div>
@@ -287,8 +289,8 @@ function BookingSection({ initialCountry }) {
           {service === 'Пасажирська поїздка' && <div className="form-grid form-grid--travel-details"><label className="field field--date"><span>Бажана дата (необов’язково)</span><input type="date" name="date" value={form.date} onChange={update}/></label><label className="field"><span>Кількість пасажирів</span><select name="passengers" value={form.passengers} onChange={update}>{['1','2','3','4','5','6','7','8'].map(n=><option key={n} value={n}>{n}</option>)}</select></label></div>}
           <label className="field"><span>{service === 'Передача посилки' ? 'Що потрібно передати?' : 'Коментар або додаткові побажання'}</span><textarea name="details" value={form.details} onChange={update} rows="3" placeholder={service === 'Передача посилки' ? 'Коротко опишіть посилку та її розмір' : 'Наприклад, місто прибуття або інші деталі'}/></label>
           <button className="button button--gold button--wide" type="submit">Підготувати заявку <Icon name="arrow"/></button>
-          <p className="form-note">Дані не зберігаються на сайті. Ви самостійно вирішуєте, чи копіювати та надсилати підготовлене повідомлення в Telegram.</p>
-        </form> : <div className="request-ready"><span className="request-ready__icon"><Icon name="check" size={24}/></span><span className="eyebrow"><span className="eyebrow__line"/> ЗАЯВКУ ПІДГОТОВЛЕНО</span><h3>Ще один крок<br/><em>до подорожі.</em></h3><p>Скопіюйте текст заявки та надішліть його команді FEDAS BUS у Telegram. Дані не надсилаються автоматично.</p><pre>{requestText}</pre><button className="button button--gold button--wide" onClick={copyRequest}><Icon name="copy" size={17}/>{copied ? 'Текст скопійовано' : 'Скопіювати заявку'}</button><button className="button button--outline-dark button--wide" onClick={openTelegram}>Відкрити Telegram <Icon name="send" size={17}/></button><button className="request-reset" onClick={()=>setRequestText('')}>Змінити дані заявки</button></div>}
+          <p className="form-note">Дані не зберігаються на сайті. Після підготовки заявки оберіть WhatsApp або Telegram — повідомлення відкриється для перевірки та надсилання.</p>
+        </form> : <div className="request-ready"><span className="request-ready__icon"><Icon name="check" size={24}/></span><span className="eyebrow"><span className="eyebrow__line"/> ЗАЯВКУ ПІДГОТОВЛЕНО</span><h3>Ще один крок<br/><em>до подорожі.</em></h3><p>Оберіть зручний месенджер. Заявка відкриється у новому чаті — перевірте текст і натисніть «Надіслати».</p><pre>{requestText}</pre><button className="button button--gold button--wide" onClick={openWhatsApp}><Icon name="send" size={17}/>Надіслати у WhatsApp</button><button className="button button--outline-dark button--wide" onClick={openTelegram}>Надіслати у Telegram <Icon name="send" size={17}/></button><button className="request-copy" onClick={copyRequest}><Icon name="copy" size={16}/>{copied ? 'Текст скопійовано' : 'Скопіювати текст заявки'}</button><button className="request-reset" onClick={()=>setRequestText('')}>Змінити дані заявки</button></div>}
       </div>
     </div>
   </section>;
