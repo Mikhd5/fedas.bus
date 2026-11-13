@@ -140,7 +140,7 @@ function DestinationSection({ selectedCountry, onChoose }) {
         <SectionHeading kicker="НАШІ НАПРЯМКИ" title={<>Європа ближче,<br/><em>ніж здається.</em></>} text="Оберіть країну на інтерактивній схемі або зі списку. Натисніть на напрямок, щоб підставити його у форму заявки." />
         <div className="route-map">
           <div className="route-map__topline"><span>ІНТЕРАКТИВНА СХЕМА</span><span><i/> НАПРЯМОК ОБРАНО</span></div>
-          <svg viewBox="0 0 600 340" role="img" aria-label="Схематична карта напрямків FEDAS BUS з України до шести країн Європи">
+          <svg className="route-map__diagram" viewBox="0 0 600 340" role="img" aria-label="Схематична карта напрямків FEDAS BUS з України до шести країн Європи">
             <defs><linearGradient id="routeGlow" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#f0d39b"/><stop offset="1" stopColor="#a87536"/></linearGradient></defs>
             <path className="route-map__land" d="M77 92 111 53 161 59 190 34 237 48 265 30 300 55 343 43 371 68 416 57 449 81 488 78 512 110 492 137 518 164 493 193 467 209 455 242 425 251 411 286 375 302 344 284 314 303 281 280 247 294 214 270 183 281 153 252 120 251 103 216 77 191 92 160 65 131Z"/>
             <path className="route-map__border" d="M77 92 111 53 161 59 190 34 237 48 265 30 300 55 343 43 371 68 416 57 449 81 488 78 512 110 492 137 518 164 493 193 467 209 455 242 425 251 411 286 375 302 344 284 314 303 281 280 247 294 214 270 183 281 153 252 120 251 103 216 77 191 92 160 65 131Z"/>
