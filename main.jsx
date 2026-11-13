@@ -132,14 +132,13 @@ function DestinationSection({ selectedCountry, onChoose }) {
     'Польща': [302, 169], 'Австрія': [286, 244], 'Німеччина': [238, 174]
   };
   const origin = [390, 254];
-  const active = countries.find(c => c.code === selectedCountry) || countries[0];
-  const [x, y] = points[active.code];
+  const active = countries.find(c => c.code === selectedCountry) || null;
   return <section className="section destinations" id="destinations">
     <div className="container">
       <div className="destinations__top">
         <SectionHeading kicker="НАШІ НАПРЯМКИ" title={<>Європа ближче,<br/><em>ніж здається.</em></>} text="Оберіть країну на інтерактивній схемі або зі списку. Натисніть на напрямок, щоб підставити його у форму заявки." />
         <div className="route-map">
-          <div className="route-map__topline"><span>ІНТЕРАКТИВНА СХЕМА</span><span><i/> НАПРЯМОК ОБРАНО</span></div>
+          <div className="route-map__topline"><span>ІНТЕРАКТИВНА КАРТА</span><span className={active ? "route-map__status is-selected" : "route-map__status"}><i/> {active ? "НАПРЯМОК ОБРАНО" : "ОБЕРІТЬ НАПРЯМОК"}</span></div>
           <svg className="route-map__diagram" viewBox="0 0 600 340" role="img" aria-label="Схематична карта напрямків FEDAS BUS з України до шести країн Європи">
             <defs><linearGradient id="routeGlow" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#f0d39b"/><stop offset="1" stopColor="#a87536"/></linearGradient></defs>
             <path className="route-map__land" d="M77 92 111 53 161 59 190 34 237 48 265 30 300 55 343 43 371 68 416 57 449 81 488 78 512 110 492 137 518 164 493 193 467 209 455 242 425 251 411 286 375 302 344 284 314 303 281 280 247 294 214 270 183 281 153 252 120 251 103 216 77 191 92 160 65 131Z"/>
@@ -152,7 +151,16 @@ function DestinationSection({ selectedCountry, onChoose }) {
             </g>; })}
             <text className="route-map__sea" x="75" y="322">EUROPE • FEDAS BUS</text>
           </svg>
-          <div className="route-map__selected"><span className="route-map__flag">{active.flag}</span><span><small>ОБРАНИЙ НАПРЯМОК</small><b>{active.name}</b></span><button type="button" onClick={() => onChoose(active.code)}>Залишити заявку <Icon name="arrow" size={15}/></button></div>
+          <div className={active ? "route-map__selected" : "route-map__selected route-map__selected--empty"} aria-live="polite">
+            {active ? <>
+              <span className="route-map__flag">{active.flag}</span>
+              <span><small>ВАШ НАПРЯМОК</small><b>{active.name}</b></span>
+              <button type="button" onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}>Продовжити <Icon name="arrow" size={15}/></button>
+            </> : <>
+              <span className="route-map__flag route-map__flag--empty"><Icon name="globe" size={23}/></span>
+              <span><small>МАРШРУТ ЩЕ НЕ ОБРАНО</small><b>Україна <em>→</em> Європа</b><small className="route-map__hint">Торкніться точки на карті або країни нижче</small></span>
+            </>}
+          </div>
         </div>
       </div>
       <div className="destination-grid">
@@ -226,11 +234,11 @@ function ParcelSection() {
 
 function BookingSection({ initialCountry }) {
   const [service, setService] = useState('Пасажирська поїздка');
-  const [country, setCountry] = useState(initialCountry || 'Німеччина');
+  const [country, setCountry] = useState(initialCountry || '');
   const [form, setForm] = useState({ name: '', phone: '', from: '', date: '', passengers: '1', details: '' });
   const [requestText, setRequestText] = useState('');
   const [copied, setCopied] = useState(false);
-  useEffect(() => setCountry(initialCountry || 'Німеччина'), [initialCountry]);
+  useEffect(() => setCountry(initialCountry || ''), [initialCountry]);
   useEffect(() => {
     const handler = e => setService(e.detail || 'Пасажирська поїздка');
     window.addEventListener('fedas-service', handler);
@@ -272,8 +280,8 @@ function BookingSection({ initialCountry }) {
           <div className="form-top"><span>ЗАЯВКА FEDAS BUS</span><span className="form-top__line"/></div>
           <div className="field"><span>Що вас цікавить?</span><div className="service-switch"><button type="button" className={service==='Пасажирська поїздка'?'active':''} onClick={()=>setService('Пасажирська поїздка')}>Поїздка</button><button type="button" className={service==='Передача посилки'?'active':''} onClick={()=>setService('Передача посилки')}>Посилка</button></div></div>
           <div className="form-grid"><label className="field"><span>Ваше ім’я *</span><input name="name" value={form.name} onChange={update} placeholder="Як до вас звертатися" required autoComplete="name"/></label><label className="field"><span>Номер телефону *</span><input name="phone" type="tel" value={form.phone} onChange={update} placeholder="+380 ..." required autoComplete="tel"/></label></div>
-          <div className="form-grid"><label className="field"><span>Звідки вирушаєте / відправляєте</span><input name="from" value={form.from} onChange={update} placeholder="Місто або населений пункт"/></label><label className="field"><span>Країна призначення *</span><select value={country} onChange={e=>setCountry(e.target.value)} required>{countries.map(c=><option key={c.code} value={c.code}>{c.flag} {c.name}</option>)}</select></label></div>
-          {service === 'Пасажирська поїздка' && <div className="form-grid"><label className="field"><span>Бажана дата</span><input type="date" name="date" value={form.date} onChange={update}/></label><label className="field"><span>Кількість пасажирів</span><select name="passengers" value={form.passengers} onChange={update}>{['1','2','3','4','5','6','7','8'].map(n=><option key={n} value={n}>{n}</option>)}</select></label></div>}
+          <div className="form-grid"><label className="field"><span>Звідки вирушаєте / відправляєте</span><input name="from" value={form.from} onChange={update} placeholder="Місто або населений пункт"/></label><label className="field"><span>Країна призначення *</span><select value={country} onChange={e=>setCountry(e.target.value)} required><option value="" disabled>Оберіть країну</option>{countries.map(c=><option key={c.code} value={c.code}>{c.flag} {c.name}</option>)}</select></label></div>
+          {service === 'Пасажирська поїздка' && <div className="form-grid form-grid--travel-details"><label className="field field--date"><span>Бажана дата (необов’язково)</span><input type="date" name="date" value={form.date} onChange={update}/></label><label className="field"><span>Кількість пасажирів</span><select name="passengers" value={form.passengers} onChange={update}>{['1','2','3','4','5','6','7','8'].map(n=><option key={n} value={n}>{n}</option>)}</select></label></div>}
           <label className="field"><span>{service === 'Передача посилки' ? 'Що потрібно передати?' : 'Коментар або додаткові побажання'}</span><textarea name="details" value={form.details} onChange={update} rows="3" placeholder={service === 'Передача посилки' ? 'Коротко опишіть посилку та її розмір' : 'Наприклад, місто прибуття або інші деталі'}/></label>
           <button className="button button--gold button--wide" type="submit">Підготувати заявку <Icon name="arrow"/></button>
           <p className="form-note">Дані не зберігаються на сайті. Ви самостійно вирішуєте, чи копіювати та надсилати підготовлене повідомлення в Telegram.</p>
@@ -301,11 +309,17 @@ function Footer() {
 }
 
 function App() {
-  const [selectedCountry, setSelectedCountry] = useState('Німеччина');
-  const chooseCountry = name => {
-    setSelectedCountry(name);
-    document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const [selectedCountry, setSelectedCountry] = useState('');
+  useEffect(() => {
+    const loader = document.getElementById('site-loader');
+    if (!loader) return;
+    const timer = window.setTimeout(() => {
+      loader.classList.add('site-loader--hidden');
+      window.setTimeout(() => loader.remove(), 650);
+    }, 720);
+    return () => window.clearTimeout(timer);
+  }, []);
+  const chooseCountry = name => setSelectedCountry(name);
   return <>
     <Hero/>
     <IntroStrip/>
