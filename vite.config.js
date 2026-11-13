@@ -4,7 +4,7 @@ import { copyFileSync, existsSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const rootFiles = [
-  'fedas-logo.svg', 'fedas-mark.svg', 'hero-fleet.webp', 'fleet-crafter.webp',
+  'fedas-logo.svg', 'fedas-mark.svg', 'hero-video.mp4', 'hero-fleet.webp', 'fleet-crafter.webp',
   'interior.webp', 'parcels.webp', 'og-cover.webp', 'robots.txt', 'site.webmanifest'
 ];
 
