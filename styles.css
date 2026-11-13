@@ -405,7 +405,7 @@ img { display: block; max-width: 100%; }
 .route-map__selected button { margin-left:auto; display:flex; align-items:center; gap:8px; border:1px solid rgba(210,171,111,.45); background:rgba(198,154,88,.1); color:#e3c38f; padding:10px 12px; font-size:9px; cursor:pointer; }
 .destination-card.is-selected { background:rgba(198,154,88,.09); box-shadow:inset 0 0 0 1px rgba(198,154,88,.38); }
 .destination-card.is-selected .destination-card__name { color:#e5c38f; }
-@media(max-width:700px) { .route-map { min-height:320px; padding:12px 10px; } .route-map svg { height:235px; } .route-map__selected button { font-size:8px; padding:9px 8px; } .route-map__country { font-size:7px; } }
+@media(max-width:700px) { .route-map { min-height:320px; padding:12px 10px; } .route-map__diagram { height:235px; } .route-map__selected button { font-size:8px; padding:9px 8px; } .route-map__country { font-size:7px; } }
 
 
 /* =========================================================
