@@ -835,8 +835,9 @@ body { overflow-x: hidden; }
     rgba(4,5,5,.14);
 }
 @media (max-width: 760px) {
-  .hero__image { z-index: -3; }
-  .hero__video { display: block; z-index: -2; }
+  /* Never reveal the desktop still image while the mobile video loads. */
+  .hero__image { display: none; }
+  .hero__video { display: block; z-index: -2; background: #080909; }
   .hero__shade {
     background:
       linear-gradient(90deg, rgba(5,7,7,.67), rgba(5,7,7,.40)),
