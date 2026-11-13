@@ -406,3 +406,251 @@ img { display: block; max-width: 100%; }
 .destination-card.is-selected { background:rgba(198,154,88,.09); box-shadow:inset 0 0 0 1px rgba(198,154,88,.38); }
 .destination-card.is-selected .destination-card__name { color:#e5c38f; }
 @media(max-width:700px) { .route-map { min-height:320px; padding:12px 10px; } .route-map svg { height:235px; } .route-map__selected button { font-size:8px; padding:9px 8px; } .route-map__country { font-size:7px; } }
+
+
+/* =========================================================
+   FEDAS BUS — visual refinement pass
+   Softer surfaces, calmer controls and corrected map icon sizing.
+   ========================================================= */
+:root {
+  --bg: #090a09;
+  --bg-soft: #10110f;
+  --panel: #141511;
+  --panel-2: #1a1b17;
+  --gold: #c8a36a;
+  --gold-light: #ead2a5;
+  --text: #f5f1e8;
+  --muted: #aaa69b;
+  --line: rgba(227, 194, 137, .14);
+}
+body { overflow-x: hidden; }
+.button {
+  border-radius: 999px;
+  min-height: 52px;
+  padding: 0 25px;
+  letter-spacing: .075em;
+  box-shadow: none;
+}
+.button--gold { box-shadow: 0 7px 24px rgba(190,142,71,.12); }
+.button--outline, .button--outline-dark { border-radius: 999px; }
+.button--small { min-height: 42px; padding-inline: 18px; }
+.button:focus-visible, a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--gold-light);
+  outline-offset: 4px;
+}
+.site-header { background: rgba(7,8,8,.48); }
+.header-cta { padding-inline: 18px; }
+.hero__buttons { gap: 15px; }
+.hero__buttons .button { min-width: 184px; }
+.intro-strip { background: #0f100e; }
+
+/* Interactive map: its main SVG is the only large SVG.
+   Inline arrow icons must retain their natural small dimensions. */
+.route-map {
+  min-height: 0;
+  padding: clamp(16px, 2.1vw, 24px);
+  border: 1px solid rgba(198,154,88,.17);
+  border-radius: 22px;
+  background:
+    radial-gradient(ellipse at 62% 43%, rgba(176,129,66,.10), transparent 61%),
+    linear-gradient(145deg, #12130f, #0d0e0c);
+  box-shadow: 0 22px 55px rgba(0,0,0,.16);
+}
+.route-map__topline {
+  align-items: center;
+  font-size: 9px;
+  letter-spacing: .15em;
+}
+.route-map > svg {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 600 / 340;
+  max-height: 340px;
+  margin: 10px 0 7px;
+}
+.route-map__selected {
+  min-height: 74px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  border-top: 1px solid rgba(219,191,150,.13);
+  padding-top: 14px;
+}
+.route-map__flag { flex: 0 0 auto; font-size: 26px; }
+.route-map__selected span:nth-child(2) { min-width: 0; gap: 4px; }
+.route-map__selected small { font-size: 8px; letter-spacing: .13em; }
+.route-map__selected b { font-size: clamp(19px, 2vw, 24px); line-height: 1.1; }
+.route-map .route-map__selected button {
+  flex: 0 0 auto;
+  width: auto;
+  min-height: 42px;
+  margin-left: auto;
+  padding: 0 16px;
+  gap: 9px;
+  border: 1px solid rgba(210,171,111,.34);
+  border-radius: 999px;
+  background: rgba(198,154,88,.08);
+  color: #e3c38f;
+  font-size: 9px;
+  white-space: nowrap;
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+.route-map .route-map__selected button:hover {
+  background: rgba(198,154,88,.16);
+  border-color: rgba(210,171,111,.65);
+  transform: translateY(-1px);
+}
+.route-map .route-map__selected button svg {
+  display: inline-block;
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px;
+  max-width: 16px;
+  flex: 0 0 16px;
+}
+.route-map__selected button svg path { vector-effect: non-scaling-stroke; }
+.destination-grid {
+  border: 0;
+  gap: 11px;
+  margin-top: 28px;
+}
+.destination-card {
+  min-height: 104px;
+  padding: 18px 17px 15px;
+  border: 1px solid rgba(227,194,137,.12);
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(255,255,255,.025), rgba(255,255,255,.008));
+}
+.destination-card::before { opacity: .55; }
+.destination-card:hover { background: rgba(198,154,88,.07); }
+.destination-card__number { top: 13px; left: 16px; }
+.destination-card__flag { top: 12px; right: 16px; }
+.destination-card__name { font-size: 21px; }
+.destination-card__arrow { right: 16px; bottom: 15px; }
+.destination-card__arrow svg { width: 16px; height: 16px; }
+.destination-card.is-selected {
+  border-color: rgba(218,179,117,.58);
+  background: linear-gradient(145deg, rgba(198,154,88,.13), rgba(198,154,88,.035));
+  box-shadow: none;
+}
+.destinations__note { max-width: 760px; font-size: 10px; }
+
+/* Softer imagery and content surfaces */
+.comfort__visual { border-radius: 22px; }
+.comfort__visual::before { inset: 12px; border-radius: 14px; }
+.comfort-item { border-color: rgba(227,194,137,.12); }
+.comfort-item__icon { border: 0; background: rgba(198,154,88,.09); }
+.safety-band {
+  border-top: 1px solid rgba(227,194,137,.12);
+  border-bottom: 1px solid rgba(227,194,137,.12);
+}
+.safety-point { border-left-color: rgba(214,175,112,.26); }
+.fleet-card { border-radius: 20px; }
+.fleet-card img { border-radius: inherit; }
+.fleet-card__tag { border-radius: 999px; backdrop-filter: blur(8px); }
+.parcels__panel {
+  border: 0;
+  border-radius: 22px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #151611, #10110f);
+  box-shadow: 0 24px 60px rgba(0,0,0,.16);
+}
+.parcels__photo { min-width: 0; }
+.parcels__copy { padding: clamp(34px, 5vw, 70px); }
+.parcels__features { gap: 17px; }
+.parcels__features span { border-radius: 999px; padding: 7px 11px; background: rgba(198,154,88,.07); }
+.booking-card {
+  border: 1px solid rgba(200,157,95,.18);
+  border-radius: 22px;
+  background: linear-gradient(145deg, #181a16, #12130f);
+  box-shadow: 0 22px 55px rgba(0,0,0,.15);
+}
+.field input, .field select, .field textarea {
+  border-radius: 11px;
+  border-color: rgba(223,211,187,.13);
+  min-height: 49px;
+  padding-inline: 15px;
+}
+.field textarea { min-height: 90px; }
+.service-switch {
+  border: 0;
+  border-radius: 999px;
+  padding: 4px;
+  gap: 5px;
+  background: rgba(0,0,0,.25);
+}
+.service-switch button { border-radius: 999px; min-height: 39px; }
+.service-switch button.active {
+  background: linear-gradient(110deg, rgba(224,193,138,.2), rgba(185,134,70,.13));
+  box-shadow: inset 0 0 0 1px rgba(198,154,88,.28);
+}
+.request-ready pre { border-radius: 12px; }
+.faq-item > button b { transition: color .2s ease; }
+.faq-item > button:hover b { color: var(--gold-light); }
+.footer__cta { border-left-color: rgba(198,154,88,.28); }
+.floating-contact {
+  border: 0;
+  border-radius: 999px;
+  padding: 14px 19px;
+}
+.mobile-quickbar {
+  gap: 9px;
+  padding: 9px 12px calc(9px + env(safe-area-inset-bottom));
+  border-top: 0;
+  background: linear-gradient(180deg, rgba(8,9,8,0), rgba(8,9,8,.94) 24%);
+}
+.mobile-quickbar a {
+  height: 48px;
+  border-radius: 999px;
+  box-shadow: 0 8px 25px rgba(0,0,0,.18);
+}
+.mobile-quickbar a:first-child { border-radius: 999px; }
+@media (max-width: 760px) {
+  .section { padding: 72px 0; }
+  .hero__buttons { width: min(100%, 330px); }
+  .hero__buttons .button { min-width: 0; }
+  .route-map {
+    padding: 14px 13px 13px;
+    border-radius: 18px;
+  }
+  .route-map > svg {
+    height: auto;
+    aspect-ratio: 600 / 340;
+    margin: 8px 0 5px;
+  }
+  .route-map__selected { gap: 9px; min-height: 66px; }
+  .route-map__flag { font-size: 22px; }
+  .route-map__selected small { font-size: 7px; }
+  .route-map__selected b { font-size: 19px; }
+  .route-map .route-map__selected button {
+    min-height: 38px;
+    padding-inline: 12px;
+    font-size: 8px;
+    gap: 6px;
+  }
+  .route-map .route-map__selected button svg {
+    width: 14px !important;
+    height: 14px !important;
+    min-width: 14px;
+    max-width: 14px;
+    flex-basis: 14px;
+  }
+  .destination-grid { gap: 9px; margin-top: 23px; }
+  .destination-card { min-height: 96px; border-radius: 14px; padding: 16px 13px 14px; }
+  .destination-card__number { left: 13px; }
+  .destination-card__flag { right: 13px; }
+  .destination-card__name { font-size: 19px; }
+  .comfort__visual { border-radius: 18px; }
+  .fleet-card, .parcels__panel, .booking-card { border-radius: 18px; }
+  .parcels__panel { border: 0; }
+  .parcels__photo { min-height: 270px; }
+  .parcels__copy { padding: 32px 24px 35px; }
+  .booking-card { padding: 26px 20px; }
+  .mobile-quickbar a { height: 46px; font-size: 8px; }
+}
+@media (max-width: 390px) {
+  .route-map__selected { flex-wrap: wrap; }
+  .route-map .route-map__selected button { margin-left: auto; }
+  .destination-grid { gap: 8px; }
+  .destination-card__name { font-size: 18px; }
+}
