@@ -91,6 +91,9 @@ function Header() {
 function Hero() {
   return <section className="hero" id="top">
     <div className="hero__image" aria-hidden="true" />
+    <video className="hero__video" autoPlay muted loop playsInline preload="metadata" poster="/hero-fleet.webp" aria-hidden="true">
+      <source src="/hero-video.mp4" type="video/mp4" />
+    </video>
     <div className="hero__shade" aria-hidden="true" />
     <Header />
     <div className="container hero__content">
